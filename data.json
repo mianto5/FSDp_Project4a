@@ -25,11 +25,11 @@
       "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/2073900.jpg?width=350&org_if_sml=1"
     }
   ],
-  "comments": [
+  "admins": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "adminname": "admin1",
+      "password": "password1"
     }
   ],
   "profile": {
