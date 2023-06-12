@@ -1,7 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { cartitems } from "../redux/cartslice";
 
 export default function NavBar() {
+
+  const cart = useSelector(cartitems);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
@@ -22,7 +27,7 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" href="/home">
+              <NavLink className="nav-link active" aria-current="page" href="/">
                 Home
               </NavLink>
             </li>
@@ -31,7 +36,16 @@ export default function NavBar() {
                 Our Products
               </NavLink>
             </li>
-            <form className="d-flex">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/cart">
+              <i className="bi-cart-fill me-1"></i>
+                Cart
+                <span className="badge bg-dark text-white ms-1 rounded-pill">
+                  {cart.length}
+                </span>
+              </NavLink>
+            </li>
+            {/* <form className="d-flex">
               <button className="btn" type="submit">
                 <i className="bi-cart-fill me-1"></i>
                 Cart
@@ -39,7 +53,7 @@ export default function NavBar() {
                   0
                 </span>
               </button>
-            </form>
+            </form> */}
             {/* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"

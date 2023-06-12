@@ -37,7 +37,7 @@ const adminslice = createSlice({
         sessionStorage.setItem("adminname", state.adminname);
       })
       .addCase(loginAdmin.rejected, (state, action) => {
-        state.loginstatus = "failure";
+        state.adminstatus = "failure";
         state.adminname = "";
         state.adminLoggedIn = false;
       });
