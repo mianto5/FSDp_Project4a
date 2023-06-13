@@ -23,6 +23,38 @@
       "price": 20,
       "description": "boebfiefbeifh",
       "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/2073900.jpg?width=350&org_if_sml=1"
+    },
+    {
+      "name": "Chickpea",
+      "amount": "500g",
+      "price": 4,
+      "description": "Chickpea Description",
+      "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/2073000.jpg?width=800&org_if_sml=1",
+      "id": 4
+    },
+    {
+      "name": "Beluga Lentil",
+      "amount": "500g",
+      "price": "5",
+      "description": "Beluga Lentil Description",
+      "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/2072560.jpg?width=350&org_if_sml=1",
+      "id": 5
+    },
+    {
+      "name": "Pea",
+      "amount": "500g",
+      "price": "2",
+      "description": "Pea Description",
+      "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/2074040.jpg?width=350&org_if_sml=1",
+      "id": 6
+    },
+    {
+      "name": "Quinoa",
+      "amount": "500g",
+      "price": "6",
+      "description": "Quinoa Description",
+      "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/2076540.jpg?width=350&org_if_sml=1",
+      "id": 7
     }
   ],
   "admins": [
