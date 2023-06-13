@@ -26,6 +26,12 @@ export const addProduct = createAsyncThunk("add/Product", async (product) => {
   return Promise.reject("failure");
 });
 
+export const deleteProduct = createAsyncThunk("delete/Product", async (id) => {
+  let response = await fetch(`http://localhost:3000/products/`+id, {
+    method: "DELETE"
+  });
+});
+
 const productslice = createSlice({
   name: "products",
   initialState,

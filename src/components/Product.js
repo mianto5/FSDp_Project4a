@@ -2,25 +2,36 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { onAdd } from "../redux/cartslice";
+import { deleteProduct } from "../redux/productslice";
 
 export default function Product({ product }) {
   let navigate = useNavigate();
   let dispatch = useDispatch();
+  let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
 
   const onAddToCart = () => {
     dispatch(onAdd(product));
   };
 
+  const handleDelete = (id) => {
+    dispatch(deleteProduct(id));
+    navigate("/products");
+  };
+
   return product !== undefined ? (
     <div className="col mb-5">
       <div className="card h-100">
-        {/* Sale badge*/}
-        {/* <div
-                  className="badge bg-dark text-white position-absolute"
-                  style="top: 0.5rem; right: 0.5rem"
-                >
-                  Sale
-                </div> */}
+        {adminLoggedIn && (
+          <div>
+            <button
+              onClick={() => handleDelete(product.id)}
+              type="button"
+              className="btn btn-danger btn-sm text-white position-absolute"
+            >
+              Delete
+            </button>
+          </div>
+        )}
         {/* Product image*/}
         <img className="card-img-top" src={product.imageURL} alt="..." />
         {/* Product details*/}
