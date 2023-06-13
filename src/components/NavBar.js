@@ -1,11 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { cartitems } from "../redux/cartslice";
+import { logoutAdmin } from "../redux/adminslice";
 
 export default function NavBar() {
 
   const cart = useSelector(cartitems);
+  let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
+  const dispatch = useDispatch();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -38,13 +41,20 @@ export default function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/cart">
-              <i className="bi-cart-fill me-1"></i>
+                <i className="bi-cart-fill me-1"></i>
                 Cart
                 <span className="badge bg-dark text-white ms-1 rounded-pill">
                   {cart.length}
                 </span>
               </NavLink>
             </li>
+            {adminLoggedIn && (
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/admin">
+                Admin
+              </NavLink>
+            </li>
+            )}
             {/* <form className="d-flex">
               <button className="btn" type="submit">
                 <i className="bi-cart-fill me-1"></i>
@@ -89,11 +99,20 @@ export default function NavBar() {
           </ul>
 
           <ul className="navbar-nav me-right mb-2 mb-lg-0 ms-lg-4">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/admin">
-                admin
-              </NavLink>
-            </li>
+            {adminLoggedIn && (
+              <li className="nav-item">
+                <a className="nav-link" href="/" onClick={()=>dispatch(logoutAdmin())}>
+                  Log Out
+                </a>
+              </li>
+            )}
+            {!adminLoggedIn && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/login">
+                  Log In
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>

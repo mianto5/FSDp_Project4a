@@ -4,6 +4,7 @@ const initialState = {
   adminstatus: "",
   adminname: sessionStorage.getItem("adminname") || "",
   adminLoggedIn: !!sessionStorage.getItem("adminname"),
+  passwordChanged: "",
 };
 
 export const loginAdmin = createAsyncThunk("login/Admin", async (admin) => {
@@ -18,6 +19,30 @@ export const loginAdmin = createAsyncThunk("login/Admin", async (admin) => {
   return Promise.reject("error");
 });
 
+export const changePassword = createAsyncThunk("change/Password", async (password, newAdmin) => {
+  console.log("changing password");
+  let response = await fetch(
+    `http://localhost:3000/admins?adminname=${sessionStorage.getItem("adminname")}`
+  );
+  let fetchpassword = await response.json();
+  console.log(fetchpassword)
+  if (fetchpassword.length > 0 && fetchpassword[0].password === password.oldpassword &&
+    password.newpassword1 === password.newpassword2){
+      console.log("correct values :)");
+      await fetch(
+        `http://localhost:3000/admins/1`, {
+          method: "PATCH",
+          body: JSON.stringify(newAdmin),
+          headers:{
+            "Content-Type": "application/json",
+          }
+        }
+      );
+      return Promise.resolve("success");
+    }
+  return Promise.reject("error");
+});
+
 const adminslice = createSlice({
   name: "admins",
   initialState,
@@ -25,6 +50,7 @@ const adminslice = createSlice({
     logoutAdmin: (state, action) => {
       sessionStorage.removeItem("adminname");
       state.adminstatus = "failure";
+      state.adminLoggedIn = false;
       state.adminname = "";
     },
   },
@@ -40,7 +66,13 @@ const adminslice = createSlice({
         state.adminstatus = "failure";
         state.adminname = "";
         state.adminLoggedIn = false;
-      });
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.passwordChanged = "success";
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.passwordChanged = "failure";
+      })
   },
 });
 

@@ -1,14 +1,22 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./components/NavBar";
 import Header from "./components/Header";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
-import Home from "./components/Home"
-import Admin from "./components/Admin"
+import Home from "./components/Home";
+import Admin from "./components/Admin";
+import ChangePassword from "./components/ChangePassword";
+import { useEffect } from "react";
 
 function App() {
+  let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
+  useEffect(() => {
+    console.log("useEffect in App happend", adminLoggedIn);
+  }, [adminLoggedIn]);
+
   return (
     <BrowserRouter>
       <NavBar />
@@ -17,7 +25,8 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/products" element={<Products />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/admin" element={<ChangePassword />}></Route>
+        <Route path="/login" element={<Admin />}></Route>
       </Routes>
     </BrowserRouter>
   );

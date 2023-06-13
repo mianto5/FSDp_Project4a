@@ -15,6 +15,12 @@ export default function Admin({ setStatus, setAdminname }) {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let status = useSelector((state) => state.adminreducer.adminstatus);
+  let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
+
+  useEffect(()=>{
+    if(adminLoggedIn)
+      navigate('/admin');
+  },[adminLoggedIn])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,8 +29,8 @@ export default function Admin({ setStatus, setAdminname }) {
   };
 
   return (
-    <div className="container">
-      <div className="col-md-4">
+    <div className="container px-4 px-lg-5 mt-5">
+      <div className="col-md-6">
         <p></p>
         <h5>Please log in to administrate the website</h5>
         <p style={{ color: "red" }}>{error && error}</p>
@@ -59,11 +65,7 @@ export default function Admin({ setStatus, setAdminname }) {
               id="formGroupExampleInput2"
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={handleSubmit}
-          >
+          <button type="submit" className="btn btn-dark" onClick={handleSubmit}>
             Log In
           </button>
         </form>
