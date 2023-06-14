@@ -13,8 +13,9 @@ export default function Products() {
   let products = state.products;
   let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
 
-  /* navigate(0); */
-  
+  let sortedProducts = [...products].sort((a, b) => (a.name > b.name ? 1 : -1));
+  /*  let filteredProducts = sortedProducts; */
+
   useEffect(() => {
     if (status === "idle") {
       products = [];
@@ -25,16 +26,13 @@ export default function Products() {
     }
   }, [status]);
 
-  let filteredProducts = [...products].sort((a, b) =>
-    a.name > b.name ? 1 : -1
-  );
-
-  const handleSubmit = (e) => {
+  /* const handleSubmit = (e) => {
     e.preventDefault();
+    filteredProducts = sortedProducts;
     filteredProducts = filteredProducts.filter((product) => product.name.includes(productSearch.search));
     console.log("filtered products", filteredProducts);
     navigate("/products");
-  };
+  }; */
 
   let content = "";
   if (status === "success") {
@@ -45,7 +43,10 @@ export default function Products() {
         </div>
         <div className="container px-4 px-lg-5 mt-6">
           <form>
-            <div className="col-md-4">
+            <div className="col-sm-12 col-md-6">
+              <label htmlFor="formGroupExampleInput2" className="form-label">
+                <h5>Search Products:</h5>
+              </label>{" "}
               <input
                 type="text"
                 className="form-control"
@@ -60,19 +61,22 @@ export default function Products() {
                 ]}
                 id="formGroupExampleInput2"
               />
-              <button
+              {/* <button
                 type="submit"
                 className="btn btn-secondary" onClick={handleSubmit}
               >
                 Search Products
-              </button>
+              </button> */}
             </div>
           </form>
           <br></br>
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {products.map((product) => (
-              <Product key={product.id} product={product} />
-            ))}
+            {sortedProducts.map(
+              (product) =>
+                product.name.toLowerCase().includes(productSearch.search.toLowerCase()) && (
+                  <Product key={product.id} product={product} />
+                )
+            )}
           </div>
         </div>
       </section>

@@ -30,6 +30,7 @@ export const deleteProduct = createAsyncThunk("delete/Product", async (id) => {
   let response = await fetch(`http://localhost:3000/products/`+id, {
     method: "DELETE"
   });
+  return Promise.resolve("success");
 });
 
 const productslice = createSlice({
@@ -51,6 +52,9 @@ const productslice = createSlice({
     });
     builder.addCase(addProduct.rejected, (state, action) => {
       state.productstatus = "failure";
+      state.status = "idle";
+    });
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
       state.status = "idle";
     });
   },
