@@ -39,7 +39,8 @@ const productslice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.status = "success";
-      state.products = state.products.concat(action.payload);
+      state.products = action.payload;
+      /* state.products = state.products.concat(action.payload); */ // není problém zde???
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.status = "failure";

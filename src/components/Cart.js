@@ -28,7 +28,7 @@ export default function Cart() {
         )}
         {cart.map((product) => (
           <div key={product.id} className="row mb-3">
-            <div className="col-5">{product.name}</div>
+            <div className="col-5">{product.name} ({product.amount})</div>
             <div className="col-3">
               <button
                 onClick={() => onRemoveItem(product)}
@@ -87,7 +87,7 @@ export default function Cart() {
                 /* onClick={() => alert("Implement Checkout!")} */
                 className="btn btn-dark"
               >
-                Pay Your Order
+                Confirm Your Order
               </button>
             </div>
           </>
