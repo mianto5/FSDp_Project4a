@@ -101,12 +101,9 @@
     {
       "id": 1,
       "adminname": "admin1",
-      "password": "password1",
-      "requestId": "4lVGPfyi9K_6K5vgzF1_J",
+      "password": "admin123",
+      "requestId": "v6ajv8oQca3iRAmuJ2c9F",
       "signal": {}
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

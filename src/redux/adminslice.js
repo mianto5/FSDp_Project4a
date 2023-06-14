@@ -19,29 +19,39 @@ export const loginAdmin = createAsyncThunk("login/Admin", async (admin) => {
   return Promise.reject("error");
 });
 
-export const changePassword = createAsyncThunk("change/Password", async (password, newAdmin) => {
-  console.log("changing password");
-  let response = await fetch(
-    `http://localhost:3000/admins?adminname=${sessionStorage.getItem("adminname")}`
-  );
-  let fetchpassword = await response.json();
-  console.log(fetchpassword)
-  if (fetchpassword.length > 0 && fetchpassword[0].password === password.oldpassword &&
-    password.newpassword1 === password.newpassword2){
+export const changePassword = createAsyncThunk(
+  "change/Password",
+  async (pass) => {
+    console.log("changing password");
+    let response = await fetch(
+      `http://localhost:3000/admins?adminname=${sessionStorage.getItem(
+        "adminname"
+      )}`
+    );
+    let fetchpassword = await response.json();
+    console.log("fetchpassword: ", fetchpassword);
+    let password = pass.newpassword1;
+    if (
+      fetchpassword.length > 0 &&
+      fetchpassword[0].password === pass.oldpassword &&
+      pass.newpassword1 === pass.newpassword2
+    ) {
       console.log("correct values :)");
-      await fetch(
-        `http://localhost:3000/admins/1`, {
-          method: "PATCH",
-          body: JSON.stringify(newAdmin),
-          headers:{
-            "Content-Type": "application/json",
-          }
-        }
-      );
+      await fetch(`http://localhost:3000/admins/1`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "PATCH",
+        body: JSON.stringify({
+          password
+        }),
+      });
       return Promise.resolve("success");
     }
-  return Promise.reject("error");
-});
+    return Promise.reject("error");
+  }
+);
 
 const adminslice = createSlice({
   name: "admins",
@@ -72,11 +82,12 @@ const adminslice = createSlice({
       })
       .addCase(changePassword.rejected, (state, action) => {
         state.passwordChanged = "failure";
-      })
+      });
   },
 });
 
 export let { adminLoggedIn } = (state) => state.adminreducer.adminLoggedIn;
+export let { passwordChanged } = (state) => state.adminreducer.passwordChanged;
 export let { logoutAdmin } = adminslice.actions;
 
 export default adminslice.reducer;
