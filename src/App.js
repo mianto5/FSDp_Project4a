@@ -11,6 +11,7 @@ import Admin from "./components/Admin";
 import ChangePassword from "./components/ChangePassword";
 import AddProduct from './components/AddProduct';
 import { useEffect } from "react";
+import Confirmation from "./components/Confirmation";
 
 function App() {
   let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
@@ -29,6 +30,7 @@ function App() {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/admin" element={<ChangePassword />}></Route>
         <Route path="/login" element={<Admin />}></Route>
+        <Route path="/confirm" element={<Confirmation />}></Route>
       </Routes>
     </BrowserRouter>
   );

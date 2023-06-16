@@ -25,6 +25,7 @@ export default function Admin({ setStatus, setAdminname }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginAdmin(admin));
+    setAdmin(initialState);
     //  console.log('submit')
   };
 

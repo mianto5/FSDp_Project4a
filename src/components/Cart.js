@@ -1,12 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { cartitems, onAdd, onRemove } from "../redux/cartslice";
+import { cartitems, onAdd, onRemove, removeAll } from "../redux/cartslice";
+import { addOrder } from "../redux/orderslice";
+
+const initialState = {
+  items: [],
+  cartSum: "",
+  tax: "",
+  shipping: "",
+  totalPrice: "",
+};
 
 export default function Cart() {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let cart = useSelector(cartitems);
+  let tax;
 
   const itemsPrice = cart.reduce((a, c) => a + c.qty * Number(c.price), 0);
 
@@ -15,6 +25,22 @@ export default function Cart() {
   };
   const onAddItem = (item) => {
     dispatch(onAdd(item));
+  };
+
+  const handleConfirm = () => {
+    console.log("tax price: ", (itemsPrice * 0.15).toFixed(2));
+    console.log("cart: ", cart);
+    const addedOrder = {
+      cartSum: itemsPrice.toFixed(2),
+      tax: (itemsPrice * 0.15).toFixed(2),
+      shipping: (8).toFixed(2),
+      totalPrice: (itemsPrice * 1.15 + 8).toFixed(2),
+      items: cart,
+    }
+    console.log("addedOrder: ", addedOrder);
+    dispatch(addOrder(addedOrder));
+    dispatch(removeAll());
+    navigate("/confirm");
   };
 
   return (
@@ -28,7 +54,9 @@ export default function Cart() {
         )}
         {cart.map((product) => (
           <div key={product.id} className="row mb-3">
-            <div className="col-5">{product.name} ({product.amount})</div>
+            <div className="col-5">
+              {product.name} ({product.amount})
+            </div>
             <div className="col-3">
               <button
                 onClick={() => onRemoveItem(product)}
@@ -44,13 +72,11 @@ export default function Cart() {
                 <b>+</b>
               </button>
             </div>
-
             <div className="col-3 text-right">
               {product.qty} x ${Number(product.price).toFixed(2)}
             </div>
           </div>
         ))}
-
         {cart.length !== 0 && (
           <>
             <hr></hr>
@@ -71,7 +97,6 @@ export default function Cart() {
               <div className="col-3">Shipping</div>
               <div className="col-3 text-right">${(8).toFixed(2)}</div>
             </div>
-
             <div className="row">
               <div className="col-5"></div>
               <div className="col-3">
@@ -83,10 +108,7 @@ export default function Cart() {
             </div>
             <hr />
             <div className="text-center">
-              <button
-                /* onClick={() => alert("Implement Checkout!")} */
-                className="btn btn-dark"
-              >
+              <button onClick={handleConfirm} className="btn btn-dark">
                 Confirm Your Order
               </button>
             </div>
