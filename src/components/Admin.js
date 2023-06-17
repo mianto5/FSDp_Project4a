@@ -10,23 +10,19 @@ const initialState = {
 
 export default function Admin({ setStatus, setAdminname }) {
   const [admin, setAdmin] = useState(initialState);
-  const [error, setError] = useState();
 
   let navigate = useNavigate();
   let dispatch = useDispatch();
-  let status = useSelector((state) => state.adminreducer.adminstatus);
   let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
 
-  useEffect(()=>{
-    if(adminLoggedIn)
-      navigate('/admin');
-  },[adminLoggedIn])
+  useEffect(() => {
+    if (adminLoggedIn) navigate("/admin");
+  }, [adminLoggedIn]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginAdmin(admin));
     setAdmin(initialState);
-    //  console.log('submit')
   };
 
   return (
@@ -34,7 +30,7 @@ export default function Admin({ setStatus, setAdminname }) {
       <div className="col-md-6">
         <p></p>
         <h5>Please log in to administrate the website</h5>
-        <p style={{ color: "red" }}>{error && error}</p>
+        <p></p>
         <form>
           <div className="mb-3">
             <label htmlFor="formGroupExampleInput2" className="form-label">

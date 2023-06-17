@@ -13,7 +13,6 @@ export const loginAdmin = createAsyncThunk("login/Admin", async (admin) => {
     `http://localhost:3000/admins?adminname=${admin.adminname}`
   );
   let fetchadmin = await response.json();
-  // console.log(fetchadmin)
   if (fetchadmin.length > 0 && fetchadmin[0].password === admin.password)
     return Promise.resolve(fetchadmin[0].adminname);
   return Promise.reject("error");
@@ -22,21 +21,18 @@ export const loginAdmin = createAsyncThunk("login/Admin", async (admin) => {
 export const changePassword = createAsyncThunk(
   "change/Password",
   async (pass) => {
-    console.log("changing password");
     let response = await fetch(
       `http://localhost:3000/admins?adminname=${sessionStorage.getItem(
         "adminname"
       )}`
     );
     let fetchpassword = await response.json();
-    console.log("fetchpassword: ", fetchpassword);
     let password = pass.newpassword1;
     if (
       fetchpassword.length > 0 &&
       fetchpassword[0].password === pass.oldpassword &&
       pass.newpassword1 === pass.newpassword2
     ) {
-      console.log("correct values :)");
       await fetch(`http://localhost:3000/admins/1`, {
         headers: {
           Accept: "application/json",
@@ -44,12 +40,12 @@ export const changePassword = createAsyncThunk(
         },
         method: "PATCH",
         body: JSON.stringify({
-          password
+          password,
         }),
       });
       return Promise.resolve("success");
     }
-    return Promise.reject("error");
+    return Promise.reject("failure");
   }
 );
 

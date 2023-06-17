@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchOrders } from "../redux/orderslice";
 
 export default function Confirmation() {
@@ -13,13 +13,10 @@ export default function Confirmation() {
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchOrders());
-
-      /* navigate("/products"); */
     }
   }, [status]);
 
   let lastOrder = orders[orders.length - 1];
-  console.log("lastOrder: ", lastOrder);
   let content = "";
   if (status === "success") {
     content = (
@@ -34,7 +31,9 @@ export default function Confirmation() {
             <div className="col-sm-12 col-md-6">
               <h5>Order details:</h5>
               <br></br>
-              <p><b>Order ID: {lastOrder.id}</b></p>
+              <p>
+                <b>Order ID: {lastOrder.id}</b>
+              </p>
               {lastOrder.items.map((product) => (
                 <div key={product.id} className="row mb-3">
                   <div className="col-5">
@@ -48,28 +47,22 @@ export default function Confirmation() {
               <hr></hr>
               <div className="row">
                 <div className="col-5">Cart Sum</div>
-                <div className="col-3 text-right">
-                  ${lastOrder.cartSum}
-                </div>
+                <div className="col-3 text-right">${lastOrder.cartSum}</div>
               </div>
               <div className="row">
                 <div className="col-5">Tax 15%</div>
-                <div className="col-3 text-right">
-                  ${lastOrder.tax}
-                </div>
+                <div className="col-3 text-right">${lastOrder.tax}</div>
               </div>
               <div className="row">
                 <div className="col-5">Shipping</div>
-                <div className="col-3 text-right">
-                  ${lastOrder.shipping}
-                </div>
+                <div className="col-3 text-right">${lastOrder.shipping}</div>
               </div>
               <div className="row">
                 <div className="col-5">
                   <strong>Total Price</strong>
                 </div>
                 <div className="col-3 text-right">
-                 <strong>${lastOrder.totalPrice}</strong>
+                  <strong>${lastOrder.totalPrice}</strong>
                 </div>
               </div>
               <br></br>
@@ -78,12 +71,21 @@ export default function Confirmation() {
             <div className="col-sm-12 col-md-6">
               <h5>Payment details:</h5>
               <br></br>
-              <p><b>Company Name:</b> Kitchen Story</p>
-              <p><b>Bank Account Number:</b> 987654321/0321</p>
-              <p><b>Amount:</b> ${lastOrder.totalPrice}</p>
-              <p><b>Variable Symbol:</b> {lastOrder.id}</p>
-              <p><b>Comment:</b> Payment for order with ID: {lastOrder.id}</p>
-
+              <p>
+                <b>Company Name:</b> Kitchen Story
+              </p>
+              <p>
+                <b>Bank Account Number:</b> 987654321/0321
+              </p>
+              <p>
+                <b>Amount:</b> ${lastOrder.totalPrice}
+              </p>
+              <p>
+                <b>Variable Symbol:</b> {lastOrder.id}
+              </p>
+              <p>
+                <b>Comment:</b> Payment for order with ID: {lastOrder.id}
+              </p>
             </div>
           </div>
         </div>

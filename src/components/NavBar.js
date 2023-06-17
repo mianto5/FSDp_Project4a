@@ -5,7 +5,6 @@ import { cartitems } from "../redux/cartslice";
 import { logoutAdmin } from "../redux/adminslice";
 
 export default function NavBar() {
-
   const cart = useSelector(cartitems);
   let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
   const dispatch = useDispatch();
@@ -49,59 +48,21 @@ export default function NavBar() {
               </NavLink>
             </li>
             {adminLoggedIn && (
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/admin">
-                Admin
-              </NavLink>
-            </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/admin">
+                  Admin
+                </NavLink>
+              </li>
             )}
-            {/* <form className="d-flex">
-              <button className="btn" type="submit">
-                <i className="bi-cart-fill me-1"></i>
-                Cart
-                <span className="badge bg-dark text-white ms-1 rounded-pill">
-                  0
-                </span>
-              </button>
-            </form> */}
-            {/* <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                id="navbarDropdown"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Shop
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    All Products
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Popular Items
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    New Arrivals
-                  </a>
-                </li>
-              </ul> 
-            </li> */}
           </ul>
-
           <ul className="navbar-nav me-right mb-2 mb-lg-0 ms-lg-4">
             {adminLoggedIn && (
               <li className="nav-item">
-                <a className="nav-link" href="/" onClick={()=>dispatch(logoutAdmin())}>
+                <a
+                  className="nav-link"
+                  href="/"
+                  onClick={() => dispatch(logoutAdmin())}
+                >
                   Log Out
                 </a>
               </li>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { cartitems, onAdd, onRemove, removeAll } from "../redux/cartslice";
@@ -16,7 +16,6 @@ export default function Cart() {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let cart = useSelector(cartitems);
-  let tax;
 
   const itemsPrice = cart.reduce((a, c) => a + c.qty * Number(c.price), 0);
 
@@ -28,16 +27,13 @@ export default function Cart() {
   };
 
   const handleConfirm = () => {
-    console.log("tax price: ", (itemsPrice * 0.15).toFixed(2));
-    console.log("cart: ", cart);
     const addedOrder = {
       cartSum: itemsPrice.toFixed(2),
       tax: (itemsPrice * 0.15).toFixed(2),
       shipping: (8).toFixed(2),
       totalPrice: (itemsPrice * 1.15 + 8).toFixed(2),
       items: cart,
-    }
-    console.log("addedOrder: ", addedOrder);
+    };
     dispatch(addOrder(addedOrder));
     dispatch(removeAll());
     navigate("/confirm");

@@ -21,14 +21,13 @@ export const addProduct = createAsyncThunk("add/Product", async (product) => {
     },
   });
   let data = await response.json();
-  console.log("Product data: ", data);
   if (data !== null || data !== undefined) return Promise.resolve("success");
   return Promise.reject("failure");
 });
 
 export const deleteProduct = createAsyncThunk("delete/Product", async (id) => {
-  let response = await fetch(`http://localhost:3000/products/`+id, {
-    method: "DELETE"
+  let response = await fetch(`http://localhost:3000/products/` + id, {
+    method: "DELETE",
   });
   return Promise.resolve("success");
 });
@@ -41,7 +40,6 @@ const productslice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.status = "success";
       state.products = action.payload;
-      /* state.products = state.products.concat(action.payload); */ // není problém zde???
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.status = "failure";

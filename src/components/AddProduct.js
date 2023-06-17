@@ -16,8 +16,6 @@ export default function AddProduct() {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
-  /* const state = useSelector((state) => state.productreducer);
-  const products = state.products; */
 
   useEffect(() => {
     if (!adminLoggedIn) navigate("/products");
@@ -25,7 +23,7 @@ export default function AddProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(addedProduct)); 
+    dispatch(addProduct(addedProduct));
     navigate("/products");
   };
 

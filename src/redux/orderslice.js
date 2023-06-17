@@ -20,33 +20,31 @@ export const addOrder = createAsyncThunk("add/Product", async (order) => {
     },
   });
   let data = await response.json();
-  console.log("Order data: ", data);
   if (data !== null || data !== undefined) return Promise.resolve("success");
   return Promise.reject("failure");
 });
 
 const orderslice = createSlice({
-    name: "orders",
-    initialState,
-    reducers: {},
-    extraReducers(builder) {
-      builder.addCase(fetchOrders.fulfilled, (state, action) => {
-        state.status = "success";
-        state.orders = action.payload;
-      });
-      builder.addCase(fetchOrders.rejected, (state, action) => {
-        state.status = "failure";
-      });
-      builder.addCase(addOrder.fulfilled, (state, action) => {
-        state.orderstatus = "success";
-        state.status = "idle";
-      });
-      builder.addCase(addOrder.rejected, (state, action) => {
-        state.orderstatus = "failure";
-        state.status = "idle";
-      });
-    },
-  });
-  
-  export default orderslice.reducer;
-  
+  name: "orders",
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
+    builder.addCase(fetchOrders.fulfilled, (state, action) => {
+      state.status = "success";
+      state.orders = action.payload;
+    });
+    builder.addCase(fetchOrders.rejected, (state, action) => {
+      state.status = "failure";
+    });
+    builder.addCase(addOrder.fulfilled, (state, action) => {
+      state.orderstatus = "success";
+      state.status = "idle";
+    });
+    builder.addCase(addOrder.rejected, (state, action) => {
+      state.orderstatus = "failure";
+      state.status = "idle";
+    });
+  },
+});
+
+export default orderslice.reducer;
