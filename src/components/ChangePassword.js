@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { changePassword } from "../redux/adminslice";
 
@@ -13,6 +13,11 @@ export default function ChangePassword() {
   const [password, setPassword] = useState(initialState);
   let dispatch = useDispatch();
   let navigate = useNavigate();
+  let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
+
+  useEffect(() => {
+    if (!adminLoggedIn) navigate("/login");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -14,7 +14,7 @@ export default function Admin({ setStatus, setAdminname }) {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let adminLoggedIn = useSelector((state) => state.adminreducer.adminLoggedIn);
-
+  
   useEffect(() => {
     if (adminLoggedIn) navigate("/admin");
   }, [adminLoggedIn]);

@@ -241,6 +241,42 @@
         }
       ],
       "id": 3
+    },
+    {
+      "cartSum": "12.00",
+      "tax": "1.80",
+      "shipping": "8.00",
+      "totalPrice": "21.80",
+      "items": [
+        {
+          "name": "Hazelnut",
+          "amount": "100g",
+          "price": "2",
+          "description": "Hazelnut Description",
+          "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/510488.jpg?width=350&org_if_sml=1",
+          "id": 11,
+          "qty": 2
+        },
+        {
+          "name": "Peanut",
+          "amount": "100g",
+          "price": "1",
+          "description": "Peanut Description",
+          "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/550225.jpg?width=350&org_if_sml=1",
+          "id": 15,
+          "qty": 2
+        },
+        {
+          "name": "Pistachio",
+          "amount": "100g",
+          "price": "3",
+          "description": "Pistachio Description",
+          "imageURL": "https://ahvxpbwmeq.cloudimg.io/v7/images/stories/virtuemart/product/2051400.jpg?width=350&org_if_sml=1",
+          "id": 10,
+          "qty": 2
+        }
+      ],
+      "id": 4
     }
   ]
 }

@@ -92,6 +92,6 @@ export default function Confirmation() {
       </section>
     );
   }
-
+  
   return <div>{content}</div>;
 }
